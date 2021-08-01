@@ -1,0 +1,10 @@
+django
+djangorestframework
+markdown
+django-filter
+pyjwt
+requests
+pycryptodome
+django-extensions
+Werkzeug
+pyOpenSSL
