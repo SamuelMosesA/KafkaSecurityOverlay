@@ -34,7 +34,7 @@ Use python >3.7 for this
 ## Admin instruction
   
   * auth server has admin portal
-  * you can access it by adding going to https://<authserverip>:<port>/admin
+  * you can access it by adding going to https://\<authserverip\>:\<port\>/admin
   * login into the admin
   * to add a new user, go to the User database and create
   * if the user is a client
