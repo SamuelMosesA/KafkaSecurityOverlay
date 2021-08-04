@@ -10,7 +10,7 @@ Use python >3.7 for this
 
 ### Auth server
   * cd into RestAuth
-  * run python3 manage.py runserver_plus --cert ./ssl/ <ip>:8000
+  * run python3 manage.py runserver_plus --cert ./ssl/ \<ip\>:8000
   * allow firewall access to this port
   * check by accessing the website on browser. You can ignore brower warnings for now
   
@@ -19,7 +19,7 @@ Use python >3.7 for this
     * add the details for auth server's address and port
     * add the deatails for the kafka bootstrap server
   * cd into KafkaOverlay
-  * run python3 manage.py runserver <ip>:5000
+  * run python3 manage.py runserver \<ip\>:5000
   * allow firewall access to this port
   
   
