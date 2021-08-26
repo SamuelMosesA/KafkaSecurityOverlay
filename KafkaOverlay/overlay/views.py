@@ -8,6 +8,7 @@ from Crypto.Random import get_random_bytes
 from Crypto.Cipher import AES, PKCS1_OAEP
 from django.views.decorators.csrf import csrf_exempt
 from kafka import KafkaProducer
+from ipsettings import setting
 
 def loginView(request):
     request.session['enc_key'] = None
@@ -52,8 +53,8 @@ def produceMessage(request):
                              AES.MODE_EAX,
                              nonce)
         data = cipher_aes.decrypt_and_verify(ciphertext, tag)
-        producer = KafkaProducer(bootstrap_servers=['cabitha:9092'])
-        future =  producer.send(request.session['topic'], data)
+        # producer = KafkaProducer(bootstrap_servers=[setting['BROKER_SERVER']])
+        # future =  producer.send(request.session['topic'], data)
         print(data.decode("utf-8"), request.session['topic'], request.user.__str__())
         return HttpResponse('Data Received')
     else:

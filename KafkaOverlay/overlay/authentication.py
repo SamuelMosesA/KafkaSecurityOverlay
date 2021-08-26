@@ -1,5 +1,6 @@
 from django.contrib.auth.middleware import RemoteUserMiddleware
 from django.contrib.auth.backends import RemoteUserBackend
+from ipsettings import setting
 import jwt
 import requests
 
@@ -15,7 +16,7 @@ def isGood(request):
     s.auth = ('broker', '6prZrrNwwQ5X54')
     s.headers.update({'Accept': 'application/json'})
     keys = None
-    keys = s.get('https://10.21.226.4:8000/pubkey/', verify=False, params={'username': usr}).json()
+    keys = s.get('https://'+setting['AUTH_SERVER']+'/pubkey/', verify=False, params={'username': usr}).json()
 
     client_decode = None
     try:
