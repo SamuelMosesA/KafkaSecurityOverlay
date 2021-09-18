@@ -1,4 +1,6 @@
 import asyncio
+import datetime
+
 import websockets
 import ssl
 import pathlib
@@ -37,10 +39,14 @@ async def produce(username, key):
         await websocket.send(token)
         try:
             await websocket.ping()
-            while True:
-                mesg = input(">>>")
-                await websocket.send(mesg)
-        except websockets.ConnectionClosed:
+            print('pinged')
+            for i in range(1000000):
+                # mesg = input(">>>")
+                await websocket.send(str(i))
+
+        # except websockets.ConnectionClosed:
+        finally:
+            print(datetime.datetime.now())
             print("closed")
             await websocket.close()
             return

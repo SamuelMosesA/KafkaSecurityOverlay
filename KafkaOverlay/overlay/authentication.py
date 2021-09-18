@@ -1,9 +1,8 @@
 from django.contrib.auth.middleware import RemoteUserMiddleware
 from django.contrib.auth.backends import RemoteUserBackend
-from ipsettings import setting
+from .ipsettings import setting
 import jwt
 import requests
-
 
 class CustomHeaderMiddleware(RemoteUserMiddleware):
     header = 'HTTP_REMOTE_USER'

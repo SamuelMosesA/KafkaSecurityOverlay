@@ -1,14 +1,13 @@
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
-from django.middleware.csrf import get_token
-from django.contrib.auth.decorators import login_required
 from binascii import b2a_base64, a2b_base64
+
+from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
 from Crypto.Random import get_random_bytes
-from Crypto.Cipher import AES, PKCS1_OAEP
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.middleware.csrf import get_token
 from django.views.decorators.csrf import csrf_exempt
-from kafka import KafkaProducer
-from ipsettings import setting
+
 
 def loginView(request):
     request.session['enc_key'] = None
@@ -53,8 +52,8 @@ def produceMessage(request):
                              AES.MODE_EAX,
                              nonce)
         data = cipher_aes.decrypt_and_verify(ciphertext, tag)
-        # producer = KafkaProducer(bootstrap_servers=[setting['BROKER_SERVER']])
-        # future =  producer.send(request.session['topic'], data)
+        producer = KafkaProducer(bootstrap_servers=[setting['BROKER_SERVER']])
+        future =  producer.send(request.session['topic'], data)
         print(data.decode("utf-8"), request.session['topic'], request.user.__str__())
         return HttpResponse('Data Received')
     else:

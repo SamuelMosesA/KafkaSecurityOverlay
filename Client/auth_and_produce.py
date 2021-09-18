@@ -33,27 +33,27 @@ with requests.Session() as s:
 
     Broker_token = jwt.encode(token, Client_token['keys']['private_key'], algorithm='RS256',
                               headers={'username': username})
-#print(Broker_token)
-#print(jwt.decode(Broker_token, Client_token['keys']['public_key'], algorithms='RS256'))
+print(Broker_token)
+print(jwt.decode(Broker_token, Client_token['keys']['public_key'], algorithms='RS256'))
 
-with requests.Session() as client:
-    postURL = 'http://localhost:5000/auth/'
-    client.headers.update({'remote-user': username})
-    r = client.get(postURL)
-    csrft = r.cookies['csrftoken']
-    info = {'jwt': Broker_token, 'csrfmiddlewaretoken': csrft}
-    result = client.post(postURL, data=info, headers=dict(Referer=postURL))
-    getURL = 'http://localhost:5000/getkey/'
-
-    enc_key = client.get(getURL)
-    enc_session_key = a2b_base64(enc_key.text)
-    private_key = Client_token['keys']['private_key']
-    cipher_rsa = PKCS1_OAEP.new(RSA.importKey(private_key))
-    session_key = cipher_rsa.decrypt(enc_session_key)
-    session_key_str = byte_to_string(session_key)
-
-    produceURL = 'http://localhost:5000/prod/'
-    while(True):
-        inp = input('>')
-        print(client.post(produceURL, data=encrypted_message(session_key, inp)).text)
+# with requests.Session() as client:
+#     postURL = 'http://localhost:5000/auth/'
+#     client.headers.update({'remote-user': username})
+#     r = client.get(postURL)
+#     csrft = r.cookies['csrftoken']
+#     info = {'jwt': Broker_token, 'csrfmiddlewaretoken': csrft}
+#     result = client.post(postURL, data=info, headers=dict(Referer=postURL))
+#     getURL = 'http://localhost:5000/getkey/'
+#
+#     enc_key = client.get(getURL)
+#     enc_session_key = a2b_base64(enc_key.text)
+#     private_key = Client_token['keys']['private_key']
+#     cipher_rsa = PKCS1_OAEP.new(RSA.importKey(private_key))
+#     session_key = cipher_rsa.decrypt(enc_session_key)
+#     session_key_str = byte_to_string(session_key)
+#
+#     produceURL = 'http://localhost:5000/prod/'
+#     while(True):
+#         inp = input('>')
+#         print(client.post(produceURL, data=encrypted_message(session_key, inp)).text)
 

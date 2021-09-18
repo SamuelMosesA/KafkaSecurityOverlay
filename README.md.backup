@@ -24,8 +24,7 @@ Use python >3.7 for this
   
 ### Broker overlay websocket server
 
-- cd to Websocket Endpoints and run python broker_server.py
-- It will start a websocket server at port 8765
+- cd to Web
   
   
 ### Client
