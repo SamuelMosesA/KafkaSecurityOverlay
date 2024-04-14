@@ -15,7 +15,7 @@ django-extensions==3.1.3
 django-filter==2.4.0
 djangorestframework==3.12.4
 hyperlink==21.0.0
-idna==3.2
+idna==3.7
 incremental==21.3.0
 kafka-python==2.0.2
 Markdown==3.3.4
