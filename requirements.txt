@@ -33,7 +33,7 @@ sqlparse==0.4.2
 Twisted==21.7.0
 txaio==21.2.1
 typing-extensions==3.10.0.2
-urllib3==1.26.6
+urllib3==1.26.18
 websockets==10.0
 Werkzeug==2.0.1
 zope.interface==5.4.0
